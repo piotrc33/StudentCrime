@@ -16,7 +16,7 @@ import kotlin.random.Random
 
 class ListFragment : Fragment(), CrimeAdapter.Callbacks {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var crimeList: ArrayList<Crime>
+    private val crimeList: ArrayList<Crime> = CrimeList.crimeList
     private lateinit var crimeAdapter: CrimeAdapter
     private val viewModel: CrimeViewModel by activityViewModels()
 
@@ -26,12 +26,10 @@ class ListFragment : Fragment(), CrimeAdapter.Callbacks {
     ): View? {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_list, container, false)
-        val bundle = arguments
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        crimeList = ArrayList()
         for(i in 1..20) {
             val current = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
